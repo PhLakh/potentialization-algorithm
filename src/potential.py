@@ -123,6 +123,8 @@ class Potential:
                     for node in graph.nodes:
                         if graph.has_edge(node, from_node) and graph.has_edge(node, to_node):
                             graph[node][from_node]["weight"] = max(graph[node][from_node]["weight"], graph[node][to_node]["weight"])
+                        if graph.has_edge(from_node, node) and graph.has_edge(to_node, node):
+                            graph[from_node][node]["weight"] = max(graph[from_node][node]["weight"], graph[to_node][node]["weight"])
                     nx.contracted_nodes(graph, from_node, to_node, self_loops=False, copy=False)
 
     def create_potential_matrix(self, debug=False):
